@@ -80,8 +80,8 @@
 Ключи:
 - Первичный ключ: order_service_part_id  
 - Внешние ключи:
-  - order_service_id → Order_Service
-  - part_id → Parts
+  - order_service_id -> Order_Service
+  - part_id -> Parts
 
 ### Связи между сущностями
 - Orders — Order_Service: связь один-ко-многим  
@@ -90,30 +90,73 @@
 - Parts — Order_Service_Part: связь один-ко-многим  
 
 ## Физическая модель
+```sql
+CREATE TABLE Orders (
+    order_id SERIAL PRIMARY KEY,
+    order_date DATE NOT NULL,
+    product_name VARCHAR(255) NOT NULL,
+    customer_name VARCHAR(255) NOT NULL,
+    due_date DATE NOT NULL,
+    
+    CONSTRAINT chk_order_dates CHECK (due_date >= order_date)
+);
+CREATE TABLE Services (
+    service_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL,
+    price NUMERIC(10,2) NOT NULL,
+
+    CONSTRAINT chk_service_price CHECK (price>0)
+);
+CREATE TABLE potaskuev2262.Parts (
+    part_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL,
+    price NUMERIC(10,2) NOT NULL,
+    
+    CONSTRAINT chk_part_price CHECK (price>0)
+);
+
+CREATE TABLE Order_Service (
+    order_service_id SERIAL PRIMARY KEY,
+    order_id INT NOT NULL REFERENCES Orders(order_id),
+    service_id INT NOT NULL REFERENCES Services(service_id)
+    
+    UNIQUE (order_id, service_id)
+);
+
+CREATE TABLE Order_Service_Part (
+    order_service_part_id SERIAL PRIMARY KEY,
+    order_service_id INT NOT NULL REFERENCES Order_Service(order_service_id),
+    part_id INT NOT NULL REFERENCES Parts(part_id),
+    quantity INT NOT NULL
+    
+    CONSTRAINT chk_part_quantity CHECK (quantity>0),
+    UNIQUE (order_service_id, part_id)
+);
+```
 
 ## DDL запросы
 ### Создаем таблицы
-Orders:
+#### Orders:
 ![](pictures/Orders.png)
-Services:
+#### Services:
 ![](pictures/Services.png)
-Parts:
+#### Parts:
 ![](pictures/Parts.png)
-Order_Service:
+#### Order_Service:
 ![](pictures/Order_Service.png)
-Order_Service_Part:
+#### Order_Service_Part:
 ![](pictures/Order_Service_Part.png)
 
 ### Заполняем таблицы данными
-Orders:
+#### Orders:
 ![](pictures/Orders_DATA.png)
-Services:
+#### Services:
 ![](pictures/Services_DATA.png)
-Parts:
+#### Parts:
 ![](pictures/Parts_DATA.png)
-Order_Service:
+#### Order_Service:
 ![](pictures/Order_Service_DATA.png)
-Order_Service_Part:
+#### Order_Service_Part:
 ![](pictures/Order_Service_Part_DATA.png)
 
 ## SELECT запросы
@@ -125,3 +168,25 @@ Order_Service_Part:
 Список заказов за заданную дату (2025-03-01)
 с суммой заказа, отсортировано по изделию
 ![](pictures/SELECT2.png)
+
+# Лабораторная работа 3
+
+## Создание представлений для выходных документов
+Напишем представления для выходных документов из прошлой работы: 
+### Для первого документа
+![](pictures/VIEW1.png)
+![](pictures/SELECT_VIEW1.png)
+### Для второго документа
+![](pictures/VIEW2.png)
+![](pictures/SELECT_VIEW2.png)
+
+Теперь выходные документы формируются простыми SELECT, сложная логика скрыта внутри VIEW.
+
+## Создание процедур
+### Для первого документа
+![](pictures/PROC1.png)
+![](pictures/SELECT_PROC1.png)
+### Для второго документа
+![](pictures/PROC2.png)
+![](pictures/SELECT_PROC2.png)
+
