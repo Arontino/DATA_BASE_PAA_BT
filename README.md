@@ -93,27 +93,27 @@
 
 ## DDL запросы
 ### Создаем таблицы
-Orders:
+#### Orders:
 ![](pictures/Orders.png)
-Services:
+#### Services:
 ![](pictures/Services.png)
-Parts:
+#### Parts:
 ![](pictures/Parts.png)
-Order_Service:
+#### Order_Service:
 ![](pictures/Order_Service.png)
-Order_Service_Part:
+#### Order_Service_Part:
 ![](pictures/Order_Service_Part.png)
 
 ### Заполняем таблицы данными
-Orders:
+#### Orders:
 ![](pictures/Orders_DATA.png)
-Services:
+#### Services:
 ![](pictures/Services_DATA.png)
-Parts:
+#### Parts:
 ![](pictures/Parts_DATA.png)
-Order_Service:
+#### Order_Service:
 ![](pictures/Order_Service_DATA.png)
-Order_Service_Part:
+#### Order_Service_Part:
 ![](pictures/Order_Service_Part_DATA.png)
 
 ## SELECT запросы
