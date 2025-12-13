@@ -80,8 +80,8 @@
 Ключи:
 - Первичный ключ: order_service_part_id  
 - Внешние ключи:
-  - order_service_id → Order_Service
-  - part_id → Parts
+  - order_service_id -> Order_Service
+  - part_id -> Parts
 
 ### Связи между сущностями
 - Orders — Order_Service: связь один-ко-многим  
