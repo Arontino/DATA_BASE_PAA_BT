@@ -171,3 +171,22 @@ CREATE TABLE Order_Service_Part (
 
 # Лабораторная работа 3
 
+## Создание представлений для выходных документов
+Напишем представления для выходных документов из прошлой работы: 
+### Для первого документа
+![](pictures/VIEW1.png)
+![](pictures/SELECT_VIEW1.png)
+### Для второго документа
+![](pictures/VIEW2.png)
+![](pictures/SELECT_VIEW2.png)
+
+Теперь выходные документы формируются простыми SELECT, сложная логика скрыта внутри VIEW.
+
+## Создание процедур
+### Для первого документа
+![](pictures/PROC1.png)
+![](pictures/SELECT_PROC1.png)
+### Для второго документа
+![](pictures/PROC2.png)
+![](pictures/SELECT_PROC2.png)
+
