@@ -90,6 +90,49 @@
 - Parts — Order_Service_Part: связь один-ко-многим  
 
 ## Физическая модель
+```sql
+CREATE TABLE Orders (
+    order_id SERIAL PRIMARY KEY,
+    order_date DATE NOT NULL,
+    product_name VARCHAR(255) NOT NULL,
+    customer_name VARCHAR(255) NOT NULL,
+    due_date DATE NOT NULL,
+    
+    CONSTRAINT chk_order_dates CHECK (due_date >= order_date)
+);
+CREATE TABLE Services (
+    service_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL,
+    price NUMERIC(10,2) NOT NULL,
+
+    CONSTRAINT chk_service_price CHECK (price>0)
+);
+CREATE TABLE potaskuev2262.Parts (
+    part_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL,
+    price NUMERIC(10,2) NOT NULL,
+    
+    CONSTRAINT chk_part_price CHECK (price>0)
+);
+
+CREATE TABLE Order_Service (
+    order_service_id SERIAL PRIMARY KEY,
+    order_id INT NOT NULL REFERENCES Orders(order_id),
+    service_id INT NOT NULL REFERENCES Services(service_id)
+    
+    UNIQUE (order_id, service_id)
+);
+
+CREATE TABLE Order_Service_Part (
+    order_service_part_id SERIAL PRIMARY KEY,
+    order_service_id INT NOT NULL REFERENCES Order_Service(order_service_id),
+    part_id INT NOT NULL REFERENCES Parts(part_id),
+    quantity INT NOT NULL
+    
+    CONSTRAINT chk_part_quantity CHECK (quantity>0),
+    UNIQUE (order_service_id, part_id)
+);
+```
 
 ## DDL запросы
 ### Создаем таблицы
@@ -125,3 +168,6 @@
 Список заказов за заданную дату (2025-03-01)
 с суммой заказа, отсортировано по изделию
 ![](pictures/SELECT2.png)
+
+# Лабораторная работа 3
+
