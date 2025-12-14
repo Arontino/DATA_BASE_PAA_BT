@@ -120,7 +120,6 @@ CREATE TABLE Order_Service (
     order_id INT NOT NULL REFERENCES Orders(order_id),
     service_id INT NOT NULL REFERENCES Services(service_id)
     
-    UNIQUE (order_id, service_id)
 );
 
 CREATE TABLE Order_Service_Part (
@@ -130,7 +129,6 @@ CREATE TABLE Order_Service_Part (
     quantity INT NOT NULL
     
     CONSTRAINT chk_part_quantity CHECK (quantity>0),
-    UNIQUE (order_service_id, part_id)
 );
 ```
 
