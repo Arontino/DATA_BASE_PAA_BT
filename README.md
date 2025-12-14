@@ -183,10 +183,32 @@ CREATE TABLE Order_Service_Part (
 Теперь выходные документы формируются простыми SELECT, сложная логика скрыта внутри VIEW.
 
 ## Создание процедур
-### Для первого документа
+### Для первого документа:
 ![](pictures/PROC1.png)
 ![](pictures/SELECT_PROC1.png)
-### Для второго документа
+### Для второго документа:
 ![](pictures/PROC2.png)
 ![](pictures/SELECT_PROC2.png)
+
+### Процедура для доавления услуги в заказ.
+![](pictures/INSERT.png)
+- Вызываем таблицу:
+  ![](pictures/Order_Service_TABLE1.png)
+
+- Вызваем процедуру, добавляя к заказу 1 услугу 4: 
+  ![](pictures/CALL1.png)
+
+- Снова вызываем таблицу:
+  ![](pictures/Order_Service_TABLE2.png)
+
+### Процедура для изменения количества заданной запчасти в конкретной услуге заказа:
+![](pictures/UPDATE.png)
+- Вызываем таблицу:
+  ![](pictures/Order_Service_Part_TABLE1.png)
+
+- Изменяем количество запчасти в услуге заказа 2 с двух запчестей до четырёх: 
+  ![](pictures/CALL2.png)
+
+- Снова вызываем таблицу:
+  ![](pictures/Order_Service_Part_TABLE2.png)
 
