@@ -49,7 +49,7 @@
 Назначение: используется как справочник запчастей.
 Атрибуты:
 - part_id - уникальный идентификатор запчасти  
-- name - наименование запчасти, должно быть уникально
+- name - наименование запчасти
 - price - стоимость одной единицы запчасти  
 Первичный ключ: part_id
 
@@ -102,14 +102,14 @@ CREATE TABLE Orders (
 );
 CREATE TABLE Services (
     service_id SERIAL PRIMARY KEY,
-    name VARCHAR(255) UNIQUE NOT NULL,
+    name VARCHAR(255) NOT NULL,
     price NUMERIC(10,2) NOT NULL,
 
     CONSTRAINT chk_service_price CHECK (price>0)
 );
-CREATE TABLE potaskuev2262.Parts (
+CREATE TABLE Parts (
     part_id SERIAL PRIMARY KEY,
-    name VARCHAR(255) UNIQUE NOT NULL,
+    name VARCHAR(255) NOT NULL,
     price NUMERIC(10,2) NOT NULL,
     
     CONSTRAINT chk_part_price CHECK (price>0)
