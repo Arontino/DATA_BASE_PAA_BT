@@ -128,7 +128,7 @@ CREATE TABLE Order_Service_Part (
     part_id INT NOT NULL REFERENCES Parts(part_id),
     quantity INT NOT NULL
     
-    CONSTRAINT chk_part_quantity CHECK (quantity>0),
+    CONSTRAINT chk_part_quantity CHECK (quantity>0)
 );
 ```
 
