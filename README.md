@@ -232,7 +232,7 @@ CREATE TABLE Order_Service_Part (
   ![](pictures/generate_order_service_part.png)
 ### Вызов генератора:
   ![](pictures/generate_order_service_part_call.png)
-### Проверяем заполнение данных в талицах:
+### Проверяем заполнение данных в таблицах:
   ![](pictures/check_data.png)
 ## Анализ планов выполнения запросов (EXPLAIN ANALYZE).
 ### Анализ второго выходного запроса:
