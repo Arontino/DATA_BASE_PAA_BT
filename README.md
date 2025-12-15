@@ -49,7 +49,7 @@
 Назначение: используется как справочник запчастей.
 Атрибуты:
 - part_id - уникальный идентификатор запчасти  
-- name - наименование запчасти, должно быть уникально
+- name - наименование запчасти
 - price - стоимость одной единицы запчасти  
 Первичный ключ: part_id
 
@@ -102,14 +102,14 @@ CREATE TABLE Orders (
 );
 CREATE TABLE Services (
     service_id SERIAL PRIMARY KEY,
-    name VARCHAR(255) UNIQUE NOT NULL,
+    name VARCHAR(255) NOT NULL,
     price NUMERIC(10,2) NOT NULL,
 
     CONSTRAINT chk_service_price CHECK (price>0)
 );
-CREATE TABLE potaskuev2262.Parts (
+CREATE TABLE Parts (
     part_id SERIAL PRIMARY KEY,
-    name VARCHAR(255) UNIQUE NOT NULL,
+    name VARCHAR(255) NOT NULL,
     price NUMERIC(10,2) NOT NULL,
     
     CONSTRAINT chk_part_price CHECK (price>0)
@@ -120,7 +120,6 @@ CREATE TABLE Order_Service (
     order_id INT NOT NULL REFERENCES Orders(order_id),
     service_id INT NOT NULL REFERENCES Services(service_id)
     
-    UNIQUE (order_id, service_id)
 );
 
 CREATE TABLE Order_Service_Part (
@@ -129,8 +128,7 @@ CREATE TABLE Order_Service_Part (
     part_id INT NOT NULL REFERENCES Parts(part_id),
     quantity INT NOT NULL
     
-    CONSTRAINT chk_part_quantity CHECK (quantity>0),
-    UNIQUE (order_service_id, part_id)
+    CONSTRAINT chk_part_quantity CHECK (quantity>0)
 );
 ```
 
@@ -190,25 +188,61 @@ CREATE TABLE Order_Service_Part (
 ![](pictures/PROC2.png)
 ![](pictures/SELECT_PROC2.png)
 
-### Процедура для доавления услуги в заказ.
+### Процедура для добавления услуги в заказ.
 ![](pictures/INSERT.png)
-- Вызываем таблицу:
+#### Вызываем таблицу:
   ![](pictures/Order_Service_TABLE1.png)
 
-- Вызваем процедуру, добавляя к заказу 1 услугу 4: 
+#### Вызваем процедуру, добавляя к заказу 1 услугу 4:
   ![](pictures/CALL1.png)
 
-- Снова вызываем таблицу:
-  ![](pictures/Order_Service_TABLE2.png)
+#### Снова вызываем таблицу:
+  ![](pictures/Order_Service_TABEL2.png)
 
 ### Процедура для изменения количества заданной запчасти в конкретной услуге заказа:
 ![](pictures/UPDATE.png)
-- Вызываем таблицу:
+#### Вызываем таблицу:
   ![](pictures/Order_Service_Part_TABLE1.png)
 
-- Изменяем количество запчасти в услуге заказа 2 с двух запчестей до четырёх: 
+#### Изменяем количество запчасти в услуге заказа 2 с двух запчестей до четырёх:
   ![](pictures/CALL2.png)
 
-- Снова вызываем таблицу:
+#### Снова вызываем таблицу:
   ![](pictures/Order_Service_Part_TABLE2.png)
 
+# Лабараторная работа 4
+## Создаем генераторы, что будут заполнять таблицы.
+### Генератор для Orders:
+  ![](pictures/generate_orders.png)
+### Вызов генератора:
+  ![](pictures/generate_orders_call.png)
+### Генератор для Services:
+  ![](pictures/generate_services.png)
+### Вызов генератора:
+  ![](pictures/generate_services_call.png)
+### Генератор для Parts:
+  ![](pictures/generate_parts.png)
+### Вызов генератора:
+  ![](pictures/generate_parts_call.png)
+### Генератор для Order_Service:
+  ![](pictures/generate_order_service.png)
+### Вызов генератора:
+  ![](pictures/ggenerate_order_service_call.png)
+### Генератор для Order_Service_Part:
+  ![](pictures/generate_order_service_part.png)
+### Вызов генератора:
+  ![](pictures/generate_order_service_part_call.png)
+### Проверяем заполнение данных в талицах:
+  ![](pictures/check_data.png)
+## Анализ планов выполнения запросов (EXPLAIN ANALYZE).
+### Анализ второго выходного запроса:
+  ![](pictures/SELECT2_EXPLAIN.png)
+  ![](pictures/SELECT2_EXPLAIN_TABLE.png)
+- Как видно из таблицы, на выполнение этого запроса ушло 16.888 мс.
+### Создаем индексы для оптимизации БД:
+  ![](pictures/INDEXES.png)
+### Снова делаем анализ запроса:
+  ![](pictures/SELECT2_EXPLAIN2.png)
+- Исходя из данных таблицы, мы видим что время выполнения запроса сократилось до 4.886 мс. Это в 4 раза быстрее в отличии от первого запроса.
+
+# Лабараторная работа 5
