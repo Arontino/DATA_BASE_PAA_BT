@@ -246,3 +246,35 @@ CREATE TABLE Order_Service_Part (
 - Исходя из данных таблицы, мы видим что время выполнения запроса сократилось до 4.886 мс. Это в 4 раза быстрее в отличии от первого запроса.
 
 # Лабараторная работа 5
+## Создание триггера.
+### Триггерная функция для каскадного удаления из Order_Service при удалении Orders:
+![](pictures/TRIGGERF1.png)
+### Сам триггер:
+![](pictures/TRIGGER1.png)
+### Триггерная функция для каскадного удаления из Order_Service_Part при удалении Order_Service:
+![](pictures/TRIGGERF2.png)
+### Сам триггер:
+![](pictures/TRIGGER1.png)
+## Проверка работы:
+### Смотрим таблицы:
+![](pictures/CHECK11.png)
+![](pictures/CHECK12.png)
+![](pictures/CHECK13.png)
+### Удаляем заказ с id 1000:
+![](pictures/DELETETE.png)
+### Проверяем таблицы:
+![](pictures/CHECK21.png)
+![](pictures/CHECK22.png)
+## Создание аудита для отслеживания изминений в Orders.
+### Создаем таблицу аудита:
+![](pictures/audit.png)
+### Создаем триггерную функцию и сам триггер:
+![](pictures/TRIGGERF3.png)
+![](pictures/TRIGGER3.png)
+### Делаем изменения в таблице Orders для проверки:
+![](pictures/CHANGE3.png)
+![](pictures/CHANGE2.png)
+![](pictures/CHANGE1.png)
+### Проверяем таблицу аудита:
+![](pictures/audit_check.png)
+
