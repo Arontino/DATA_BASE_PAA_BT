@@ -126,7 +126,7 @@ CREATE TABLE Order_Service_Part (
     order_service_part_id SERIAL PRIMARY KEY,
     order_service_id INT NOT NULL REFERENCES Order_Service(order_service_id),
     part_id INT NOT NULL REFERENCES Parts(part_id),
-    quantity INT NOT NULL
+    quantity INT NOT NULL,
     
     CONSTRAINT chk_part_quantity CHECK (quantity>0)
 );
@@ -232,7 +232,7 @@ CREATE TABLE Order_Service_Part (
   ![](pictures/generate_order_service_part.png)
 ### Вызов генератора:
   ![](pictures/generate_order_service_part_call.png)
-### Проверяем заполнение данных в талицах:
+### Проверяем заполнение данных в таблицах:
   ![](pictures/check_data.png)
 ## Анализ планов выполнения запросов (EXPLAIN ANALYZE).
 ### Анализ второго выходного запроса:
